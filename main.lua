@@ -23,8 +23,8 @@ player = {
     isGrounded = false, -- on the ground
     hasReachedMax = false,
     jumpAcceleration = 450,
-    jumpMaxSpeed = 9.5,
-    gravity = 80,
+    jumpMaxSpeed = 10,
+    gravity = 90,
 
     -- Storage
     img = nil
