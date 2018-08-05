@@ -1,0 +1,45 @@
+Sprint
+Walk
+idle
+idleSword
+Run
+RunSword
+Crouchn
+Crouch Walk
+Slide
+Attack1
+Attack2
+Attack3
+Air Attack1
+Air Attack2
+Attack falling (Start - loop - loop - 3 for landing)
+Jump
+Fall
+Somersault
+Corner Grab
+Corner Climb
+Corner Jump
+Wall Run
+Wall Slide
+Wall Climb
+Sword Draw
+Sword Sheathe
+Hurt
+Die
+Cast Spell
+Cast Spell (loop)
+Use Item
+Water Idle
+Water Swim
+Stand
+Punch1
+Punch2
+Punch3
+Kick1
+Kick 2
+Drop Kick
+Knocked Down
+Get up
+Bow aim
+Bow shoot
+Air bow
