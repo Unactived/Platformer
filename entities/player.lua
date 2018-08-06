@@ -6,10 +6,77 @@ local player = Class{
 }
 
 function player:init(world, x, y)
-    self.img = love.graphics.newImage('/assets/sprites/player.png')
+    self.hitboxW = 19
+    self.hitboxH = 30
 
-    Entity.init(self, world, x, y, self.img:getWidth(),
-    self.img:getHeight())
+    self.frameW = 50
+    self.frameH = 37
+
+    Entity.init(self, world, x, y, self.hitboxW, self.hitboxH)
+
+    self.sheet = love.graphics.newImage('/assets/sprites/player_sheet.png')
+    self.frames = {
+        -- The values in the tables are the animation's line in the sheet and
+        -- the animation's length used later to fill them with
+        -- the appropriate amount of quads
+
+        sprint = {0, 6},
+        walk = {1, 6},
+        idle = {2, 4},
+        idleSword = {3, 4},
+        run = {4, 6},
+        runSword = {5, 6},
+        crouch = {6, 4},
+        crouchWalk = {7, 6},
+        slide = {8, 2},
+        attack = {9, 5},
+        attack2 = {10, 6},
+        attack3 = {11, 6},
+        airAttack1 = {12, 4},
+        airAttack2 = {13, 3},
+        attackFalling = {14, 6},
+        jump = {15, 4},
+        fall = {16, 2},
+        somersault = {17, 4},
+        cornerGrab = {18, 4},
+        cornerClimb = {19, 5},
+        cornerJump = {20, 2},
+        wallRun = {21, 6},
+        wallSlide = {22, 2},
+        wallClimb = {23, 4},
+        swordDraw = {24, 4},
+        swordSheathe = {25, 4},
+        hurt = {26, 3},
+        die = {27, 7},
+        castSpell = {28, 4},
+        castSpellLoop = {29, 4},
+        useItem = {30, 3},
+        waterIdle = {31, 6},
+        waterSwim = {32, 4},
+        stand = {33, 3},
+        punch = {34, 4},
+        punch2 = {35, 5},
+        punch3 = {36, 4},
+        kick = {37, 4},
+        kick2 = {38, 4},
+        dropKick = {39, 4},
+        knockedDown = {40, 7},
+        getUp = {41, 7},
+        bowAim = {42, 5},
+        bowShoot = {43, 4},
+        airBow = {44, 6}
+    }
+
+    -- loads quads from the sheet
+    for k, v in pairs(self.frames) do
+        -- empty the tables and get appropriate variables
+        animationLine = table.remove(v, 1)
+        animationLen  = table.remove(v, 1)
+        for i=0, animationLen do
+            table.insert(v, love.graphics.newQuad(i * 50, animationLine * 37, self.frameW, self.frameH,
+            self.sheet:getDimensions()))
+        end
+    end
 
     -- Homemade physics
     self.xVelocity = 0
@@ -26,7 +93,7 @@ function player:init(world, x, y)
     self.jumpMaxSpeed = 10
     self.gravity = 90
 
-    self.world:add(self, self:getRect())
+    self.world:add(self, x, y, 19, 29) -- hitbox dimensions
 end
 
 function player:collisionFilter(other)
@@ -84,7 +151,7 @@ function player:update(dt)
 end
 
 function player:draw()
-    love.graphics.draw(self.img, self.x, self.y)
+    love.graphics.draw(self.sheet, self.frames.idle[1], self.x, self.y)
 end
 
 return player

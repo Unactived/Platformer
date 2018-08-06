@@ -1,7 +1,11 @@
-pause = Gamestate.new()
+pause = {}
+
+pauseSound = love.audio.newSource('/assets/sfx/pause.wav', 'static')
 
 function pause:enter(from)
     self.from = from -- save previous state
+    music:pause()
+    pauseSound:play()
 end
 
 function pause:draw()
@@ -19,6 +23,7 @@ end
 
 function pause:keypressed(key)
     if key == 'p' then
+        music:play() -- resumes music, do not restart it
         return Gamestate.pop() -- return to previous state
     end
 end

@@ -1,3 +1,5 @@
+io.stdout:setvbuf("no") -- Stops output buffering to directly flush stdout
+
 Gamestate = require 'libs.hump.gamestate'
 
 local mainMenu = require 'gamestates.mainMenu'
