@@ -13,6 +13,8 @@ end
 
 function love.keypressed(key)
     if key == "escape" then
-        love.event.push('quit')
+      love.event.push('quit')
+    elseif key == "lctrl" then
+      debug.debug()
     end
 end
