@@ -1,3 +1,6 @@
+# ME
+*.love
+
 # Compiled Lua sources
 luac.out
 
