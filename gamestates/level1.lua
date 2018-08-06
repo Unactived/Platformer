@@ -23,6 +23,7 @@ function level1:enter()
     ground_1 = Ground(world, 0, 400, 640, 16)
 
     Entities:addMany({player, ground_0, ground_1})
+    music:setLooping(true)
     music:play()
 end
 
