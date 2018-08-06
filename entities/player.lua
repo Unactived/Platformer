@@ -6,8 +6,6 @@ local player = Class{
 }
 
 function player:init(world, x, y)
-    self.frame = 1 -- frame index in animations tables
-    self.dt = 0
     self.hitboxW = 19
     self.hitboxH = 30
 
@@ -69,8 +67,6 @@ function player:init(world, x, y)
         airBow = {44, 6}
     }
 
-    self.currentAnimation = self.frames.idle
-    
     -- loads quads from the sheet
     for k, v in pairs(self.frames) do
         -- empty the tables and get appropriate variables
@@ -93,7 +89,6 @@ function player:init(world, x, y)
     self.isJumping = false -- action of jumping
     self.isGrounded = false -- on the ground
     self.hasReachedMax = false
-    self.isLeft = false -- Used to flip sprites
     self.jumpAcceleration = 450
     self.jumpMaxSpeed = 10
     self.gravity = 90
@@ -112,8 +107,6 @@ function player:collisionFilter(other)
 end
 
 function player:update(dt)
-    local oldAnimation = self.currentAnimation
-    
     local prevX, prevY = self.x, self.y
 
     -- Friction
@@ -123,11 +116,8 @@ function player:update(dt)
     -- Gravity
     self.yVelocity = self.yVelocity + self.gravity * dt
 
-    if love.keyboard.isDown('left', 'q') then
-      self.isLeft = true
-      if self.xVelocity > -self.maxSpeed then
-        self.xVelocity = self.xVelocity - self.acceleration* dt
-      end
+    if love.keyboard.isDown('left', 'q') and self.xVelocity > -self.maxSpeed
+        then self.xVelocity = self.xVelocity - self.acceleration* dt
     elseif love.keyboard.isDown('right', 'd') and self.xVelocity < self.maxSpeed then
         self.xVelocity = self.xVelocity + self.acceleration* dt
     end
@@ -158,41 +148,10 @@ function player:update(dt)
             self.isGrounded = true
         end
     end
-    
-    ------------------------
-    --     ANIMATION      --
-    ------------------------
-        
-    -- cycles animations 1/60 = 0.016
-    if self.currentAnimation == oldAnimation then
-      if self.dt > 0.1 then
-        self.frame = self.frame + 1
-        self.frame = self.frame % (#self.currentAnimation - 1)
-        self.dt = 0
-      else
-        self.dt = self.dt + dt
-      end
-    else
-      self.frame = 1
-      self.dt = 0
-    end
-    
-    -- I hate Lua and its arrays indexed to 1
-    if self.frame == 0 then
-      self.frame = 1
-    end
-    
-    self.image = self.currentAnimation[self.frame]
-    
-    -- Quad:flip is deprecated
-    -- if self.isLeft then
-    --   self.image = self.image:flip(true, false)
-    -- end
-    
 end
 
-function player:draw(dt)
-    love.graphics.draw(self.sheet, self.image, self.x, self.y)
+function player:draw()
+    love.graphics.draw(self.sheet, self.frames.idle[1], self.x, self.y)
 end
 
 return player
