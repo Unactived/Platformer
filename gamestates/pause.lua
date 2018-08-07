@@ -11,6 +11,7 @@ end
 function pause:draw()
     local pauseImg = love.graphics.newImage('/assets/images/pause.png')
     local w, h = love.graphics.getWidth(), love.graphics.getHeight()
+    local imgW, imgH = pauseImg:getDimensions()
     -- draw previous screen
     self.from:draw()
 
@@ -18,7 +19,7 @@ function pause:draw()
     love.graphics.setColor(0,0,0, 0.5) -- semi-transparent
     love.graphics.rectangle('fill', 0,0, w,h) -- shadow
     love.graphics.setColor(255, 255, 255)
-    love.graphics.draw(pauseImg, w/6, h/6)
+    love.graphics.draw(pauseImg, (w-imgW)/2, (h-imgH)/4.5)
 end
 
 function pause:keypressed(key)
