@@ -13,6 +13,6 @@ Random löve platformer to test Tiled, OO, and GameStates implementations in Lua
 
 [Arcade Platformer Assets](https://opengameart.org/content/arcade-platformer-assets) by [GrafxKid](https://opengameart.org/users/grafxkid)
 
-### Musics
+#### Musics
 
-[Senile](https://modarchive.org/index.php?request=view_by_moduleid&query=56341) by xxx
+[Senile](https://modarchive.org/index.php?request=view_by_moduleid&query=56341) by [smirk](https://modarchive.org/index.php?request=view_profile&query=68947)
